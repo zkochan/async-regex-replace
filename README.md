@@ -16,7 +16,7 @@ with the returned host:port combination.
 'use strict';
 var arr = require('async-regex-replace');
 
-arr.replace(/regex/g, "String with regex to replace", function(match, callback) {
+arr.replace(/regex/g, "String with regex to replace", function(match, offset, original, callback) {
   setTimeout(function() {
     var replacement_value = match.split('').reverse().join('');
     var err = null;

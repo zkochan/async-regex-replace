@@ -17,7 +17,8 @@ module.exports = {
  * The done callback will be invoked with (err, result) once all replacements have been processed.
  *
  */
-function replace(regex, str, replacer, done) {
+function replace(regex, str, replacer, done, prev) {
+	prev = prev || 0
 	regex.lastIndex = 0;
 	var match = regex.exec(str);
 	if(match==null) { // No matches, we are done.
@@ -25,24 +26,26 @@ function replace(regex, str, replacer, done) {
 	}
 	else {
 		// Found a match, call the async replacer
-		replacer.apply(null, match.concat(function(err, result) {
-			if(err) { // If the replacer failed, callback and pass the error
-				return done(err, result);
-			}
-			var matchIndex = match.index;
-			var matchLength = match[0].length;
-			// Splice the replacement back into the string
-			var accum = str.substring(0,matchIndex) + result;
-			var rest = str.substring(matchIndex + matchLength);
-			if(regex.global) { // Keep replacing
-				replace(regex, rest, replacer, function(err, remaining) {
-						done(err, accum + remaining);
-					});
-			}
-			else {
-				done(null, accum + rest);
-			}
-		}));
+		replacer.apply(null, match.concat([prev + match.index, str, next]));
+	}
+
+	function next(err, result) {
+		if(err) { // If the replacer failed, callback and pass the error
+			return done(err, result);
+		}
+		var matchIndex = match.index;
+		var matchLength = match[0].length;
+		// Splice the replacement back into the string
+		var accum = str.substring(0,matchIndex) + result;
+		var rest = str.substring(matchIndex + matchLength);
+		if(regex.global) { // Keep replacing
+			replace(regex, rest, replacer, function(err, remaining) {
+					done(err, accum + remaining);
+				}, prev + matchIndex + matchLength);
+		}
+		else {
+			done(null, accum + rest);
+		}
 	}
 }
 

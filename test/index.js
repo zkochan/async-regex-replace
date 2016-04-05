@@ -2,7 +2,7 @@ var async_regex_replace = require("../index");
 var should = require("should");
 
 var replacers = {
-	simple : function(match, cb) {
+	simple : function(match, offset, original, cb) {
 		if(match==="match") {
 			cb(null, "replace");
 		}
@@ -10,10 +10,10 @@ var replacers = {
 			cb("Unexpected match - " + match);
 		}
 	},
-	reverse : function(match, cb) {
+	reverse : function(match, offset, original, cb) {
 		cb(null, match.split('').reverse().join(''));
 	},
-	recurring : function(match, cb) {
+	recurring : function(match, offset, original, cb) {
 		cb(null, '[' + match + '](' + match + ')');
 	}
 }
@@ -111,9 +111,22 @@ describe("async-regex-replace", function() {
 		});
 
 		it("should pass the matches to the replacer", function(done) {
-			async_regex_replace.replace(/foo (bar) (qar)/g, 'foo bar qar', function(match, bar, qar, cb) {
+			async_regex_replace.replace(/foo (bar) (qar)/g, 'foo bar qar', function(match, bar, qar, offset, target, cb) {
 				bar.should.equal('bar');
 				qar.should.equal('qar');
+				cb();
+			}, function() {
+				done();
+			});
+		});
+
+		it("should pass the correct offset", function(done) {
+			var offsets = [0, 4, 8]
+			var matchNo = 0
+			async_regex_replace.replace(/foo/g, 'foo foo foo', function(match, offset, target, cb) {
+				match.should.equal('foo');
+			 	offset.should.equal(offsets[matchNo])
+				matchNo++
 				cb();
 			}, function() {
 				done();
