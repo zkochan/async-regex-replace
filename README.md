@@ -4,7 +4,7 @@ node.js library for regex replacements using asynchronous callback functions
 
 <!--@shields.flatSquare('travis', 'npm')-->
 [![Build status](https://img.shields.io/travis/zkochan/async-replace.svg?style=flat-square)](https://travis-ci.org/zkochan/async-replace)
-[![NPM version](https://img.shields.io/npm/v/async-replace.svg?style=flat-square)](https://www.npmjs.com/package/async-replace)
+[![NPM version](https://img.shields.io/npm/v/@zkochan/async-replace.svg?style=flat-square)](https://www.npmjs.com/package/@zkochan/async-replace)
 <!--/@-->
 
 
@@ -25,7 +25,7 @@ with the returned host:port combination.
 This module is installed via npm:
 
 ``` sh
-npm install async-replace --save
+npm install @zkochan/async-replace --save
 ```
 <!--/@-->
 
@@ -35,7 +35,7 @@ npm install async-replace --save
 <!--@example('./example.js')-->
 ``` js
 'use strict'
-const asyncReplace = require('async-replace')
+const asyncReplace = require('@zkochan/async-replace')
 
 asyncReplace('String with regex to replace', /regex/g, (match, offset, str, cb) => {
   setTimeout(() => {

@@ -1,5 +1,5 @@
 {
-  "name": "async-replace",
+  "name": "@zkochan/async-replace",
   "version": "0.3.0",
   "description": "Regex replacements using asynchronous callback functions",
   "homepage": "https://github.com/pmarkert/async-replace/wiki",
