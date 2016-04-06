@@ -1,7 +1,7 @@
 {
   "name": "@zkochan/async-regex-replace",
   "version": "0.2.0",
-  "description": "regex replacements using asynchronous callback functions",
+  "description": "Regex replacements using asynchronous callback functions",
   "homepage": "https://github.com/pmarkert/async-regex-replace/wiki",
   "main": "index.js",
   "scripts": {
@@ -9,11 +9,18 @@
     "md": "mos"
   },
   "author": "Phillip Markert <phillip@ephisys.com>",
+  "contributors": [
+    {
+      "name": "Zoltan Kochan",
+      "email": "zoltan.kochan@gmail.com",
+      "url": "http://kochan.io"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pmarkert/async-regex-replace"
+    "url": "https://github.com/zkochan/async-regex-replace"
   },
-  "bugs": "https://github.com/pmarkert/async-regex-replace/issues",
+  "bugs": "https://github.com/zkochan/async-regex-replace/issues",
   "keywords": [
     "regex",
     "async",
