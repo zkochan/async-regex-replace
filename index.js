@@ -2,14 +2,14 @@
 const runAsync = require('run-async')
 
 module.exports = runAsync.cb(
-  (regexp, str, replacer, done) => asyncReplace(regexp, str, replacer, done)
+  (str, regexp, replacer, done) => asyncReplace(str, regexp, replacer, done)
 )
 
 /**
  * Replaces instances of the regex in str using the asynchronous callback function, replacer
  *
- * @param {regex} regex The regex object to execute.
  * @param {string} str The string to be matched
+ * @param {RegExp} regexp The regex object to execute.
  * @param {function} replacer The asynchronous callback function called to translate matches into replacements
  * @param {function} done The callback function invoked on completion or error
  *
@@ -19,10 +19,10 @@ module.exports = runAsync.cb(
  * The done callback will be invoked with (err, result) once all replacements have been processed.
  *
  */
-function asyncReplace (regex, str, replacer, done, prev) {
+function asyncReplace (str, regexp, replacer, done, prev) {
   prev = prev || 0
-  regex.lastIndex = 0
-  const match = regex.exec(str)
+  regexp.lastIndex = 0
+  const match = regexp.exec(str)
   if (match == null) {
     return done(null, str)
   }
@@ -38,8 +38,8 @@ function asyncReplace (regex, str, replacer, done, prev) {
     // Splice the replacement back into the string
     const accum = str.substring(0, matchIndex) + result
     const rest = str.substring(matchIndex + matchLength)
-    if (regex.global) {
-      return asyncReplace(regex, rest, replacer, (err, remaining) => done(err, accum + remaining), prev + matchIndex + matchLength)
+    if (regexp.global) {
+      return asyncReplace(rest, regexp, replacer, (err, remaining) => done(err, accum + remaining), prev + matchIndex + matchLength)
     }
     done(null, accum + rest)
   }
