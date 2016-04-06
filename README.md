@@ -34,22 +34,23 @@ npm install @zkochan/async-regex-replace --save
 
 <!--@example('./example.js')-->
 ``` js
-'use strict';
-var arr = require('@zkochan/async-regex-replace');
+'use strict'
+const asyncRegexReplace = require('@zkochan/async-regex-replace')
 
-arr.replace(/regex/g, "String with regex to replace", function(match, offset, original, callback) {
-  setTimeout(function() {
-    var replacement_value = match.split('').reverse().join('');
-    var err = null;
-    callback(err, replacement_value);
-  }, 1000);
-}, function(err, final_result) {
-  if(err) { console.log("Error - " + err); }
-  else {
-    console.log(final_result);
+asyncRegexReplace(/regex/g, 'String with regex to replace', (match, offset, original, cb) => {
+  setTimeout(() => {
+    const replacement_value = match.split('').reverse().join('')
+    const err = null
+    cb(err, replacement_value)
+  }, 1000)
+}, (err, finalResult) => {
+  if (err) {
+    console.log('Error - ' + err)
+  } else {
+    console.log(finalResult)
     //> String with xeger to replace
   }
-});
+})
 ```
 <!--/@-->
 
