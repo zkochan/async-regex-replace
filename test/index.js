@@ -1,7 +1,7 @@
 'use strict'
 const describe = require('mocha').describe
 const it = require('mocha').it
-const asyncRegexReplace = require('..')
+const asyncReplace = require('..')
 const expect = require('chai').expect
 
 const replacers = {
@@ -20,10 +20,10 @@ const replacers = {
   }
 }
 
-describe('async-regex-replace', () => {
+describe('async-replace', () => {
   describe('replace', () => {
     function runTest (test, done) {
-      asyncRegexReplace(test.regex, test.string, test.replacer, function (err, result) {
+      asyncReplace(test.regex, test.string, test.replacer, function (err, result) {
         if (err) done(err)
         expect(test.expected).to.equal(result)
         done()
@@ -111,7 +111,7 @@ describe('async-regex-replace', () => {
     })
 
     it('should pass the matches to the replacer', (done) => {
-      asyncRegexReplace(/foo (bar) (qar)/g, 'foo bar qar', function (match, bar, qar, offset, target, cb) {
+      asyncReplace(/foo (bar) (qar)/g, 'foo bar qar', function (match, bar, qar, offset, target, cb) {
         expect(bar).to.equal('bar')
         expect(qar).to.equal('qar')
         cb()
@@ -123,7 +123,7 @@ describe('async-regex-replace', () => {
     it('should pass the correct offset', (done) => {
       const offsets = [0, 4, 8]
       let matchNo = 0
-      asyncRegexReplace(/foo/g, 'foo foo foo', function (match, offset, target, cb) {
+      asyncReplace(/foo/g, 'foo foo foo', function (match, offset, target, cb) {
         expect(match).to.equal('foo')
         expect(offset).to.equal(offsets[matchNo])
         matchNo++
@@ -134,7 +134,7 @@ describe('async-regex-replace', () => {
     })
 
     it('should return promise with result', (done) => {
-      return asyncRegexReplace(/foo (bar) (qar)/g, 'foo bar qar', function (match, bar, qar, offset, target) {
+      return asyncReplace(/foo (bar) (qar)/g, 'foo bar qar', function (match, bar, qar, offset, target) {
         expect(bar).to.equal('bar')
         expect(qar).to.equal('qar')
         return Promise.resolve('zoo')

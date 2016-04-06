@@ -1,8 +1,8 @@
 {
-  "name": "@zkochan/async-regex-replace",
+  "name": "async-replace",
   "version": "0.2.0",
   "description": "Regex replacements using asynchronous callback functions",
-  "homepage": "https://github.com/pmarkert/async-regex-replace/wiki",
+  "homepage": "https://github.com/pmarkert/async-replace/wiki",
   "main": "index.js",
   "scripts": {
     "lint": "standard",
@@ -19,9 +19,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zkochan/async-regex-replace"
+    "url": "https://github.com/zkochan/async-replace"
   },
-  "bugs": "https://github.com/zkochan/async-regex-replace/issues",
+  "bugs": "https://github.com/zkochan/async-replace/issues",
   "keywords": [
     "regex",
     "async",

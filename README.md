@@ -1,10 +1,10 @@
-# async-regex-replace
+# async-replace
 
 node.js library for regex replacements using asynchronous callback functions
 
 <!--@shields.flatSquare('travis', 'npm')-->
-[![Build status](https://img.shields.io/travis/zkochan/async-regex-replace.svg?style=flat-square)](https://travis-ci.org/zkochan/async-regex-replace)
-[![NPM version](https://img.shields.io/npm/v/@zkochan/async-regex-replace.svg?style=flat-square)](https://www.npmjs.com/package/@zkochan/async-regex-replace)
+[![Build status](https://img.shields.io/travis/zkochan/async-replace.svg?style=flat-square)](https://travis-ci.org/zkochan/async-replace)
+[![NPM version](https://img.shields.io/npm/v/async-replace.svg?style=flat-square)](https://www.npmjs.com/package/async-replace)
 <!--/@-->
 
 
@@ -25,7 +25,7 @@ with the returned host:port combination.
 This module is installed via npm:
 
 ``` sh
-npm install @zkochan/async-regex-replace --save
+npm install async-replace --save
 ```
 <!--/@-->
 
@@ -35,9 +35,9 @@ npm install @zkochan/async-regex-replace --save
 <!--@example('./example.js')-->
 ``` js
 'use strict'
-const asyncRegexReplace = require('@zkochan/async-regex-replace')
+const asyncReplace = require('async-replace')
 
-asyncRegexReplace(/regex/g, 'String with regex to replace', (match, offset, original, cb) => {
+asyncReplace(/regex/g, 'String with regex to replace', (match, offset, original, cb) => {
   setTimeout(() => {
     const replacement_value = match.split('').reverse().join('')
     const err = null

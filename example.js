@@ -1,7 +1,7 @@
 'use strict'
-const asyncRegexReplace = require('.')
+const asyncReplace = require('.')
 
-asyncRegexReplace(/regex/g, 'String with regex to replace', (match, offset, original, cb) => {
+asyncReplace(/regex/g, 'String with regex to replace', (match, offset, original, cb) => {
   setTimeout(() => {
     const replacement_value = match.split('').reverse().join('')
     const err = null

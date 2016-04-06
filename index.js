@@ -2,7 +2,7 @@
 const runAsync = require('run-async')
 
 module.exports = runAsync.cb(
-  (regexp, str, replacer, done) => asyncRegexReplace(regexp, str, replacer, done)
+  (regexp, str, replacer, done) => asyncReplace(regexp, str, replacer, done)
 )
 
 /**
@@ -19,7 +19,7 @@ module.exports = runAsync.cb(
  * The done callback will be invoked with (err, result) once all replacements have been processed.
  *
  */
-function asyncRegexReplace (regex, str, replacer, done, prev) {
+function asyncReplace (regex, str, replacer, done, prev) {
   prev = prev || 0
   regex.lastIndex = 0
   const match = regex.exec(str)
@@ -39,7 +39,7 @@ function asyncRegexReplace (regex, str, replacer, done, prev) {
     const accum = str.substring(0, matchIndex) + result
     const rest = str.substring(matchIndex + matchLength)
     if (regex.global) {
-      return asyncRegexReplace(regex, rest, replacer, (err, remaining) => done(err, accum + remaining), prev + matchIndex + matchLength)
+      return asyncReplace(regex, rest, replacer, (err, remaining) => done(err, accum + remaining), prev + matchIndex + matchLength)
     }
     done(null, accum + rest)
   }
