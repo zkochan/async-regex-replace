@@ -30,7 +30,9 @@
     "replacement"
   ],
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "run-async": "2.2.0"
+  },
   "devDependencies": {
     "chai": "3.5.0",
     "mocha": "^2.2.5",

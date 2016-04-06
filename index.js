@@ -1,5 +1,9 @@
 'use strict'
-module.exports = asyncRegexReplace
+const runAsync = require('run-async')
+
+module.exports = runAsync.cb(
+  (regexp, str, replacer, done) => asyncRegexReplace(regexp, str, replacer, done)
+)
 
 /**
  * Replaces instances of the regex in str using the asynchronous callback function, replacer
@@ -19,15 +23,14 @@ function asyncRegexReplace (regex, str, replacer, done, prev) {
   prev = prev || 0
   regex.lastIndex = 0
   const match = regex.exec(str)
-  if (match == null) { // No matches, we are done.
-    done(null, str)
-  } else {
-    // Found a match, call the async replacer
-    replacer.apply(null, match.concat([prev + match.index, str, next]))
+  if (match == null) {
+    return done(null, str)
   }
+  runAsync.cb(replacer, next)
+    .apply(null, match.concat([prev + match.index, str]))
 
   function next (err, result) {
-    if (err) { // If the replacer failed, callback and pass the error
+    if (err) {
       return done(err, result)
     }
     const matchIndex = match.index
@@ -35,12 +38,9 @@ function asyncRegexReplace (regex, str, replacer, done, prev) {
     // Splice the replacement back into the string
     const accum = str.substring(0, matchIndex) + result
     const rest = str.substring(matchIndex + matchLength)
-    if (regex.global) { // Keep replacing
-      asyncRegexReplace(regex, rest, replacer, (err, remaining) => {
-        done(err, accum + remaining)
-      }, prev + matchIndex + matchLength)
-    } else {
-      done(null, accum + rest)
+    if (regex.global) {
+      return asyncRegexReplace(regex, rest, replacer, (err, remaining) => done(err, accum + remaining), prev + matchIndex + matchLength)
     }
+    done(null, accum + rest)
   }
 }

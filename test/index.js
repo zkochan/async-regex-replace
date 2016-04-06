@@ -132,5 +132,17 @@ describe('async-regex-replace', () => {
         done()
       })
     })
+
+    it('should return promise with result', (done) => {
+      return asyncRegexReplace(/foo (bar) (qar)/g, 'foo bar qar', function (match, bar, qar, offset, target) {
+        expect(bar).to.equal('bar')
+        expect(qar).to.equal('qar')
+        return Promise.resolve('zoo')
+      })
+      .then((result) => {
+        expect(result).to.eq('zoo')
+        done()
+      })
+    })
   })
 })
