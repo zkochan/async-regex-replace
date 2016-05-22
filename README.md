@@ -39,7 +39,7 @@ npm install @zkochan/async-replace --save
 <!--@example('./example.js')-->
 ``` js
 'use strict'
-const asyncReplace = require('./dist/index.js')
+const asyncReplace = require('@zkochan/async-replace')
 
 asyncReplace('String with regex to replace', /regex/g, (match, offset, str, cb) => {
   setTimeout(() => {
