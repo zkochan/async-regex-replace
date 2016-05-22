@@ -1,6 +1,6 @@
 {
   "name": "@zkochan/async-replace",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "String replace using asynchronous replacement functions",
   "homepage": "https://github.com/pmarkert/async-replace/wiki",
   "main": "dist/index.js",
