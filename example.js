@@ -1,5 +1,5 @@
 'use strict'
-const asyncReplace = require('.')
+const asyncReplace = require('./dist/index.js')
 
 asyncReplace('String with regex to replace', /regex/g, (match, offset, str, cb) => {
   setTimeout(() => {

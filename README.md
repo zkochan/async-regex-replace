@@ -39,7 +39,7 @@ npm install @zkochan/async-replace --save
 <!--@example('./example.js')-->
 ``` js
 'use strict'
-const asyncReplace = require('@zkochan/async-replace')
+const asyncReplace = require('./dist/index.js')
 
 asyncReplace('String with regex to replace', /regex/g, (match, offset, str, cb) => {
   setTimeout(() => {
@@ -88,6 +88,7 @@ MIT © Phillip Markert
 <!--@dependencies()-->
 ## Dependencies
 
-- [run-async](https://github.com/sboudrias/run-async): Utility method to run function either synchronously or asynchronously using the common `this.async()` style.
+- [babel-run-async](https://github.com/zkochan/run-async): Utility method to run function either synchronously or asynchronously using the common `this.async()` style.
+- [babel-runtime](https://github.com/babel/babel/blob/master/packages): babel selfContained runtime
 
 <!--/@-->

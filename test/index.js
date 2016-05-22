@@ -1,8 +1,6 @@
-'use strict'
-const describe = require('mocha').describe
-const it = require('mocha').it
-const asyncReplace = require('..')
-const expect = require('chai').expect
+import {describe, it} from 'mocha'
+import asyncReplace from '../index'
+import {expect} from 'chai'
 
 const replacers = {
   simple (match, offset, original, cb) {

@@ -1,7 +1,6 @@
-'use strict'
-const runAsync = require('run-async')
+import runAsync from 'babel-run-async'
 
-module.exports = runAsync.cb(
+export default runAsync.cb(
   (str, regexp, replacer, done) => asyncReplace(str, regexp, replacer, done)
 )
 
@@ -26,8 +25,7 @@ function asyncReplace (str, regexp, replacer, done, prev) {
   if (match == null) {
     return done(null, str)
   }
-  runAsync.cb(replacer, next)
-    .apply(null, match.concat([prev + match.index, str]))
+  runAsync.cb(replacer, next)(...match, prev + match.index, str)
 
   function next (err, result) {
     if (err) {
