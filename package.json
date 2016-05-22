@@ -15,7 +15,8 @@
     "test:md": "npm run transpile && mos t",
     "test": "npm run test-es5 && npm run test:md",
     "md": "npm run transpile && mos",
-    "transpile": "babel index.js --out-dir dist"
+    "transpile": "babel index.js --out-dir dist",
+    "prepublish": "npm run transpile"
   },
   "author": "Phillip Markert <phillip@ephisys.com>",
   "contributors": [
